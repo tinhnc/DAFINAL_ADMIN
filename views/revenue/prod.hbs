@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biểu đồ Doanh thu theo Sản phẩm</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 80%; margin: 0 auto;">
+        <canvas id="productRevenueChart"></canvas>
+    </div>
+
+    <script>
+        const productRevenueData = {{{data}}};
+        const ctx = document.getElementById('productRevenueChart').getContext('2d');
+        let chart;
+
+        function updateProductRevenueChart(data) {
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(item => item.product),
+                    datasets: [
+                        {
+                            label: 'Doanh thu theo sản phẩm',
+                            data: data.map(item => item.total),
+                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1,
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
+        }
+
+        updateProductRevenueChart(productRevenueData);
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<section
+  class="about d-lg-flex justify-content-center align-items-center"
+  id="about"
+>
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-md-8 col-lg-8 full-screen col-md-12 col-12 d-flex align-items-center justify-content-around"
+      >
+        <div class="about-text">
+          <small class="small-text">Chào mừng đến với
+            <span class="mobile-block">trang quản trị Admin</span></small>
+          <h1 class="animated animated-text">
+            <span class="mr-2">Chào
+              {{#if isAuthenticated}}
+                {{authUser.name}}
+              {{/if}}
+              , Design by</span>
+
+            <div class="animated-info">
+              <span class="animated-item">Coii Dev</span>
+              <span class="animated-item">Phú</span>
+            </div>
+          </h1>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-4 col-md-12 col-12">
+        <div class="about-image svg">
+          <img
+            src="/image/undraw_software_engineer_lvl5.svg"
+            class="img-fluid"
+            alt="svg image"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row full-screen">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Số lượng người dùng: {{totalUsers}}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="/account?page=1">Xem chi tiết</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Sản phẩm hiện có: {{totalProducts}}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="/product?page=1">Xem chi tiết</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Đối tác: {{totalProducers}}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="/revenue">Xem chi tiết</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Sản phẩm đã bán: {{totalCheckOuts}}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="/revenue">Xem chi tiết</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+  </div>
+</section>

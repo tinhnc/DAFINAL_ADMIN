@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biểu đồ Doanh thu</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div>
+        <select id="timeInterval">
+            <option value="day">Theo Ngày</option>
+            <option value="month">Theo Tháng</option>
+            <option value="year">Theo Năm</option>
+        </select>
+    </div>
+    <div style="width: 80%; margin: 0 auto;">
+        <canvas id="revenueChart"></canvas>
+    </div>
+
+
+    <script>
+        const revenueData = {{{data}}};
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        let chart;
+
+        function updateChart(data, label) {
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [
+                        {
+                            label: label,
+                            data: data.totals,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
+        }
+
+        // Mặc định hiển thị theo tháng
+        //updateChart({ labels: revenueData.map(item => item.date), totals: revenueData.map(item => item.total) }, 'Doanh thu theo tháng');
+
+        // Sự kiện thay đổi giá trị của dropdown
+        document.getElementById('timeInterval').addEventListener('change', function () {
+            const selectedValue = this.value;
+            if (selectedValue === 'day') {
+        // Tính dữ liệu theo ngày
+        const dailyData = revenueData.reduce((acc, item) => {
+            if (!acc[item.date]) {
+                acc[item.date] = item.total;
+            } else {
+                acc[item.date] += item.total;
+            }
+            return acc;
+        }, {});
+
+        const labels = Object.keys(dailyData);
+        const totals = Object.values(dailyData);
+
+        updateChart({ labels, totals }, 'Doanh thu theo ngày');
+                } else if (selectedValue === 'month') {
+                // Tính dữ liệu theo tháng
+                const monthlyData = revenueData.reduce((acc, item) => {
+                    //item.date = item.date.split('/')[1.2];
+                    const month = item.date.substring(3, 10);
+                    if (!acc[month]) {
+                        acc[month] = { date: month, total: 0 };
+                    }
+                    acc[month].total += item.total;
+                    return acc;
+                }, {});
+                const labels = Object.keys(monthlyData);
+                const totals = labels.map(month => monthlyData[month].total);
+                updateChart({ labels, totals }, 'Doanh thu theo tháng');
+            } else if (selectedValue === 'year') {
+                // Tính dữ liệu theo năm
+                const yearlyData = [];
+                let currentYear = { date: '', total: 0 };
+                for (const item of revenueData) {
+                    const year = item.date.split('/')[2];
+                    if (!currentYear.date) {
+                        currentYear.date = year;
+                    }
+                    if (currentYear.date !== year) {
+                        yearlyData.push(currentYear);
+                        currentYear = { date: year, total: item.total };
+                    } else {
+                        currentYear.total += item.total;
+                    }
+                }
+                yearlyData.push(currentYear);
+                updateChart({ labels: yearlyData.map(item => item.date), totals: yearlyData.map(item => item.total) }, 'Doanh thu theo năm');
+            }
+        });
+    
+    
+    updateChart({ labels: revenueData.map(item => item.date), totals: revenueData.map(item => item.total) }, 'Doanh thu theo ngày');
+    </script>
+</body>
+</html>
