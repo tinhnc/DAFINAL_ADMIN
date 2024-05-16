@@ -262,7 +262,7 @@ editProductGet: async (req, res) => {
       res.redirect("/product?page=1");
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
   
@@ -273,7 +273,7 @@ editProductGet: async (req, res) => {
       const product = await Product.findByIdAndDelete(req.params.id);
 
       if (!product) {
-        return res.status(404).send("Product not found");
+        return res.status(404).send("Không tìm thấy sản phẩm");
       }
 
       const currentCategory = await Category.findOneAndUpdate(
@@ -289,7 +289,7 @@ editProductGet: async (req, res) => {
       res.redirect("/product?page=1");
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
 };

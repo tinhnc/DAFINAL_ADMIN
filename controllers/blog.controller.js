@@ -77,7 +77,7 @@ module.exports = {
       });
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
 
@@ -103,7 +103,7 @@ module.exports = {
       res.redirect("/blog");
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
 
@@ -111,13 +111,13 @@ module.exports = {
     try {
       const blog = await Blog.findById(req.params.id);
       if (!blog) {
-        return res.status(404).send("Blog not found");
+        return res.status(404).send("Không tìm thấy blog");
       }
 
       renderForm2(req, res, blog);
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
 
@@ -126,7 +126,7 @@ module.exports = {
     try {
       const blog = await Blog.findById(req.params.id);
       if (!blog) {
-        return res.status(404).send("Blog not found");
+        return res.status(404).send("Không tìm thấy blog");
       }
 
       // Update the blog post fields
@@ -143,7 +143,7 @@ module.exports = {
       res.redirect("/blog");
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
 
@@ -152,13 +152,13 @@ module.exports = {
       const blog = await Blog.findByIdAndDelete(req.params.id);
 
       if (!blog) {
-        return res.status(404).send("Blog not found");
+        return res.status(404).send("Không tìm thấy blog");
       }
 
       res.redirect("/blog");
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
 };

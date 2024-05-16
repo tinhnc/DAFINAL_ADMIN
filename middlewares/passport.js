@@ -23,10 +23,10 @@ module.exports = (app) => {
           }
           const check = bcrypt.compareSync(password, user.password);
           if (!check) {
-            console.log("sai mat khau");
+            console.log("Mat khau sai");
             return done(null, false);
           }
-          console.log("dung mat khau");
+          console.log("Mat khau dung");
           return done(null, user);
         });
       }

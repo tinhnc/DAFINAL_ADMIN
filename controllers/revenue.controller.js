@@ -42,7 +42,7 @@ module.exports = {
     } catch (error) {
       // Xử lý lỗi nếu có
       console.error("Error in showRevenue:", error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
   showRevenueProd: async (req, res) => {
@@ -68,7 +68,7 @@ module.exports = {
       });
     } catch (error) {
       console.error("Error in showRevenueProd:", error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
 };

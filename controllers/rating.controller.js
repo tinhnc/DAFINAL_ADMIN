@@ -37,7 +37,7 @@ module.exports = {
       });
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
   editRating: async (req, res) => {
@@ -54,17 +54,17 @@ module.exports = {
       const rating = await Rating.findByIdAndDelete(req.params.id);
 
       if (!rating) {
-        return res.status(404).send("Rating not found");
+        return res.status(404).send("Không tìm thấy đánh giá");
       }
       Swal.fire({
-        title: "Good job!",
-        text: "You clicked the button!",
-        icon: "success"
+        title: "Cảm ơn bạn đã đánh giá!",
+        text: "Outbreakstyle xin cảm ơn!",
+        icon: "Thành công"
       });
       res.redirect("/rating");
     } catch (err) {
       console.error(err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Lỗi máy chủ nội bộ");
     }
   },
 };

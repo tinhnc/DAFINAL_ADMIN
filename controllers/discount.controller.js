@@ -28,7 +28,7 @@ module.exports = {
         previousPage: +page - 1,
       });
   } catch (error) {
-    res.status(500).json({ message: "Unable to fetch discounts", error });
+    res.status(500).json({ message: "Không thể lấy mã giảm giá", error });
   }
 },
 // GET /discounts/:id
@@ -37,10 +37,10 @@ module.exports = {
   try {
     const discount = await Discount.findById(id);
     if (!discount) {
-      return res.status(404).json({ message: "Discount not found" });
+      return res.status(404).json({ message: "Không tìm thấy mã giảm giá" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Unable to fetch discount", error });
+    res.status(500).json({ message: "Không thể lấy mã giảm giá", error });
   }
 },
 // Get add discount
@@ -51,7 +51,7 @@ addDiscountGet: async (req, res) => {
     console.log(req.body)
     
   } catch (error) {
-    res.status(500).json({ message: "Unable to fetch discounts", error });
+    res.status(500).json({ message: "Không thể lấy mã giảm giá", error });
   }
 
 },
@@ -79,7 +79,7 @@ addDiscountGet: async (req, res) => {
 
     // res.status(201).json({ message: "Discount created successfully", newDiscount });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Lỗi máy chủ nội bộ");
   }
 },
 // PUT /discounts/:id
@@ -90,7 +90,7 @@ addDiscountGet: async (req, res) => {
   try {
     const discount = await Discount.findById(id);
     if (!discount) {
-      return res.status(404).json({ message: "Discount not found" });
+      return res.status(404).json({ message: "Không tìm thấy mã giảm giá" });
     }
     discount.title = title;
     discount.dayStart = dayStart;
@@ -99,9 +99,9 @@ addDiscountGet: async (req, res) => {
     discount.discount = discount;
     discount.description = description;
     await discount.save();
-    res.status(200).json({ message: "Discount updated successfully", discount });
+    res.status(200).json({ message: "Cập nhật giảm giá thành công", discount });
   } catch (error) {
-    res.status(500).json({ message: "Unable to update discount", error });
+    res.status(500).json({ message: "Không thể cập nhật mã giảm giá", error });
   }
 },
 // DELETE /discounts/:id
@@ -110,12 +110,12 @@ addDiscountGet: async (req, res) => {
   try {
     const discount = await Discount.findById(id);
     if (!discount) {
-      return res.status(404).json({ message: "Discount not found" });
+      return res.status(404).json({ message: "Không tìm thấy mã giảm giá" });
     }
     await discount.remove();
-    res.status(200).json({ message: "Discount deleted successfully" });
+    res.status(200).json({ message: "Mã giảm giá đã được xóa thành công" });
   } catch (error) {
-    res.status(500).json({ message: "Unable to delete discount", error });
+    res.status(500).json({ message: "Không thể xóa giảm giá", error });
   }
 }
 }
