@@ -64,7 +64,8 @@ module.exports = {
       // Định dạng ngày giờ cho từng bài viết trong danh sách
       blogs.forEach((blog) => {
         blog.date = formatDateTime(blog.date);
-        blog.content = blog.content.slice(0, 200)+"...";
+        blog.content = blog.content.slice(0, 200)+"..."
+        ;
       });
   
       res.render("blog/list-blog", {

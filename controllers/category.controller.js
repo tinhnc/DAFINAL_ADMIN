@@ -5,7 +5,7 @@ const to_slug = require("../public/js/slug.js");
 
 module.exports = {
   showListCategory: async (req, res) => {
-    let perPage = 2; // số lượng sản phẩm xuất hiện trên 1 page
+    let perPage = 15; // số lượng sản phẩm xuất hiện trên 1 page
     let page = req.query.page || 1; // số page hiện tại
     if (page < 1) {
       page = 1;

@@ -20,7 +20,7 @@ function formatPrice(price) {
 module.exports = {
   
   showListProduct: (req, res) => {
-    let perPage = 5; // số lượng sản phẩm xuất hiện trên 1 page
+    let perPage = 8; // số lượng sản phẩm xuất hiện trên 1 page
     let page = req.query.page || 1; // số page hiện tại
     if (page < 1) {
       page = 1;

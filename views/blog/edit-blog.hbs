@@ -1,5 +1,7 @@
-<section class="vh-50 bg-image"
-  style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg'); background-size: cover;">
+<section
+  class="vh-50 bg-image"
+  style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg'); background-size: cover;"
+>
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -7,46 +9,82 @@
           <div class="card mt-4" style="border-radius: 15px;">
             <div class="card-body p-5">
 
-              <div style="display: none;" id="message" class="alert alert-danger" role="alert">
+              <div
+                style="display: none;"
+                id="message"
+                class="alert alert-danger"
+                role="alert"
+              >
               </div>
 
               <h2 class="text-uppercase text-center mb-3">Chỉnh sửa bài viết</h2>
               {{#with blog}}
-              <form action="/blog/edit-blog/{{_id}}" method="POST" enctype="multipart/form-data">
-                {{!-- title --}}
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="title">Tiêu đề</label>
-                  <input name="title" type="text" class="form-control form-control-lg" value="{{title}}" />
-                </div>
+                <form
+                  action="/blog/edit-blog/{{_id}}"
+                  method="POST"
+                  enctype="multipart/form-data"
+                >
+                  {{! title }}
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="title">Tiêu đề</label>
+                    <input
+                      name="title"
+                      type="text"
+                      class="form-control form-control-lg"
+                      value="{{title}}"
+                    />
+                  </div>
 
-                {{!-- content --}}
+                  {{! content }}
 
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="details">Nội dung</label>
-                  <div id="editor">{{{content}}}</div>
-                  <textarea id="hiddenInput" name="content" id="details" style="display: none;">{{{content}}}</textarea>
-                </div>
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="details">Nội dung</label>
+                    <div id="editor">{{{content}}}</div>
+                    <textarea
+                      id="hiddenInput"
+                      name="content"
+                      id="details"
+                      style="display: none;"
+                    >{{{content}}}</textarea>
+                  </div>
 
+                  {{! author }}
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="author">Tác giả</label>
+                    <input
+                      name="author"
+                      type="text"
+                      class="form-control form-control-lg"
+                      value="{{author}}"
+                    />
+                  </div>
 
-                {{!-- author --}}
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="author">Tác giả</label>
-                  <input name="author" type="text" class="form-control form-control-lg" value="{{author}}" />
-                </div>
+                  {{! Tags }}
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="tags">Thẻ</label>
+                    <input
+                      name="tags"
+                      type="text"
+                      class="form-control form-control-lg"
+                      value="{{tags}}"
+                    />
+                  </div>
 
-                {{!-- Tags --}}
-                <div class="form-outline mb-2">
-                  <label class="form-label" for="tags">Thẻ (comma-separated)</label>
-                  <input name="tags" type="text" class="form-control form-control-lg" value="{{tags}}" />
-                </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="image">Ảnh</label>
+                    <input
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
 
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="image">Ảnh</label>
-                  <input type="file" name="image" accept="image/*" class="form-control form-control-lg">
-                </div>
-
-                <button class="btn btn-primary btn-lg gradient-custom-4" type="submit">Cập nhật</button>
-              </form>
+                  <button
+                    class="btn btn-primary btn-lg gradient-custom-4"
+                    type="submit"
+                  >Cập nhật</button>
+                </form>
               {{/with}}
             </div>
           </div>

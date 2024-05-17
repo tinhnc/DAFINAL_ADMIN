@@ -8,7 +8,7 @@ const { subMilliseconds } = require("date-fns/fp");
 module.exports = {
   showListOrder: async (req, res) => {
     try {
-        const perPage = 3; // số lượng sản phẩm xuất hiện trên 1 page
+        const perPage = 5; // số lượng sản phẩm xuất hiện trên 1 page
         let page = req.query.page || 1; // số page hiện tại
         if (page < 1) {
             page = 1;
