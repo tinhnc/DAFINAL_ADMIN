@@ -57,7 +57,7 @@ addDiscountGet: async (req, res) => {
 },
 // POST /discounts
  createDiscount : async (req, res) => {
-  const { title, dayStart, dayEnd, codeDiscount, discount, description } = req.body;
+  const { title, dayStart, dayEnd, codeDiscount, discount, quantity,  description } = req.body;
     console.log(title, dayEnd, dayStart)
     console.log(req.body)
   try {
@@ -66,6 +66,7 @@ addDiscountGet: async (req, res) => {
       dayStart : dayStart,
       dayEnd : dayEnd,
       codeDiscount : codeDiscount,
+      quantity :quantity,
       discount : discount,
       description : description,
     });
@@ -82,28 +83,42 @@ addDiscountGet: async (req, res) => {
     res.status(500).send("Lỗi máy chủ nội bộ");
   }
 },
+editGetDiscount: (req, res) => {
+  Discount.findById(req.params.id, (err, discount) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("discount/edit-discount", {
+        discount,
+      });
+    }
+  });
+},
 // PUT /discounts/:id
- updateDiscount : async (req, res) => {
+updateDiscount : async (req, res) => {
   const { id } = req.params;
-  const { title, dayStart, dayEnd, codeDiscount, discount, description } =
-    req.body;
+  const { title, dayStart, dayEnd, codeDiscount, quantity, discount, description } = req.body;
+  
   try {
-    const discount = await Discount.findById(id);
-    if (!discount) {
+    const discountEntry = await Discount.findById(id);
+    if (!discountEntry) {
+      console.log("Discount not found for ID:", id); // Logging when discount is not found
       return res.status(404).json({ message: "Không tìm thấy mã giảm giá" });
     }
-    discount.title = title;
-    discount.dayStart = dayStart;
-    discount.dayEnd = dayEnd;
-    discount.codeDiscount = codeDiscount;
-    discount.discount = discount;
-    discount.description = description;
-    await discount.save();
-    res.status(200).json({ message: "Cập nhật giảm giá thành công", discount });
+    discountEntry.title = title;
+    discountEntry.dayStart = dayStart;
+    discountEntry.dayEnd = dayEnd;
+    discountEntry.codeDiscount = codeDiscount;
+    discountEntry.discount = discount;
+    discountEntry.quantity = quantity;
+    discountEntry.description = description;
+    await discountEntry.save();
+    res.status(200).json({ message: "Cập nhật giảm giá thành công", discount: discountEntry });
   } catch (error) {
     res.status(500).json({ message: "Không thể cập nhật mã giảm giá", error });
   }
 },
+
 // DELETE /discounts/:id
  deleteDiscount : async (req, res) => {
   const { id } = req.params;

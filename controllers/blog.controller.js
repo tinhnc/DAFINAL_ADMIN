@@ -1,6 +1,8 @@
 const Blog = require("../models/blog.model");
 const multer = require("multer");
 const path = require("path");
+const { convert } = require('html-to-text');
+
 
 // Set up Multer storage engine
 const storage = multer.diskStorage({
@@ -63,9 +65,13 @@ module.exports = {
 
       // Định dạng ngày giờ cho từng bài viết trong danh sách
       blogs.forEach((blog) => {
+        const plainTextContent = convert(blog.content, {
+          wordwrap: false, // Disable word wrapping
+        });
         blog.date = formatDateTime(blog.date);
-        blog.content = blog.content.slice(0, 200)+"..."
-        ;
+        blog.content = plainTextContent;
+        blog.content = blog.content.slice(0, 200)+"..." 
+        
       });
   
       res.render("blog/list-blog", {

@@ -27,6 +27,7 @@
     "firebase": "^10.2.0",
     "handlebars": "^4.7.8",
     "handlebars-helpers": "^0.9.8",
+    "html-to-text": "^9.0.5",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "mongoose": "^6.0.13",
